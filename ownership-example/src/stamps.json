@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name": "Stanley Park",
+    "picture": "images/stanleypark.png",
+    "fact": "Archaeological evidence suggests a human presence in the park dating back more than 3,000 years."
+  },
+  {
+    "id": 1,
+    "name": "Grouse Mountain",
+    "picture": "images/grouse.png",
+    "fact": "Named in Oct. 1894 by the first hikers to reach the peak, after the sooty (blue) grouse, a game bird in the area."
+  },
+  {
+    "id": 2,
+    "name": "Chinatown",
+    "picture": "images/chinatown.png",
+    "fact": "The China Gate on Pender Street was donated to the City of Vancouver by the Government of the People's Republic of China following the Expo 86 world's fair."
+  },
+  {
+    "id": 3,
+    "name": "Lookout - Harbour Centre",
+    "picture": "images/stanleypark.png",
+    "fact": "Opened in 1977, with the observation deck at 551 ft (168m) above street level."
+  },
+  {
+    "id": 4,
+    "name": "Science World",
+    "picture": "images/science_world.png",
+    "fact": "The Buckminster Fuller-inspired geodesic dome was designed by Expo 86's chief architect Bruno Freschi to serve as that fair's Expo Centre."
+  },
+  {
+    "id": 5,
+    "name": "Gastown",
+    "picture": "images/gastown.png",
+    "fact": "Vancouver's first downtown core named after 'Gassy' Jack Deighton, a Yorkshire seaman, steamboat captain and barkeep who arrived in 1867 to open the area's first saloon."
+  },
+  {
+    "id": 6,
+    "name": "Granville Island",
+    "picture": "images/granvilleisland.png",
+    "fact": "The very first tenant, B.C. Equipment Ltd., built a wood-framed machine shop, clad on all sides in corrugated tin, at the Island's western end. Today the same structure houses part of the Granville Island Public Market."
+  },
+  {
+    "id": 7,
+    "name": "H.R. MacMillan Space Centre",
+    "picture": "images/spacecenter.png",
+    "fact": "Founded in 1968 as an astronomy museum along with limve demonstrations on science."
+  }
+]
