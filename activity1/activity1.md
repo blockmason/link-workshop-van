@@ -56,7 +56,7 @@ First let us fetch all 10 accounts addresses running on our local blockchain. Fu
   '0xa70Eb16e4450721DCe159AE0f0F3b02743F249Ad',
   '0xC0721c07E16Bb55DCF0dAE7CA63BA0a2aC3648f6' ]
 ```
-And there are your 10 local blockchain addresses!
+And there are your 10 local blockchain addresses! We get back all the accounts because they are unlocked.  
 
 ### Get Account Balance
 Now let us get the balance of one of the local accounts **in ether units**: 
