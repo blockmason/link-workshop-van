@@ -1,9 +1,6 @@
 App = {
-  clientId: "oauyPe1qd7XpTIMPGCQ-7ES4yMg3aA-yt7NCJdrJUIk",
-  clientSecret: "P5jidxyhgHR/tEZGKybzXLpHiamSDQ4NJPqFXws3tmdRVTH4X6iehCwoC0+cqSR",
-  authURL: 'https://api.block.mason.link/oauth2/token',
-  baseURL: "https://api.block.mason.link/v1/",
   web3Provider: null,
+  contracts: {},
 
   init: function() {
     // Load stamps.
@@ -19,50 +16,57 @@ App = {
 
         stampsRow.append(stampTemplate.html());
       }
-      return App.markOwned();
     });
+
     return App.initWeb3();
   },
 
   initWeb3: function() {
-    if (typeof web3.currentProvider.selectedAddress !== 'undefined') {
-      // If a web3 provider exists
+    if (typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider;
-      web3 = new Web3(web3.currentProvider);
-    } 
-    else {
-      // Specify default instance if no web3 provider
-      App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:7545');
-      web3 = new Web3(App.web3Provider);
+    } else {
+      // If no injected web3 instance is detected, fall back to Ganache
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
+    web3 = new Web3(App.web3Provider);
+
+    return App.initContract();
+  },
+
+  initContract: function() {
+    $.getJSON('Ownership.json', function(data) {
+     // Get the necessary contract artifact file and instantiate it with truffle-contract
+     const OwnershipArtifact = data;
+     App.contracts.Ownership = TruffleContract(OwnershipArtifact);
+
+     // Set the provider for our contract
+     App.contracts.Ownership.setProvider(App.web3Provider);
+
+     // Use our contract to retrieve and mark the adopted pets
+     return App.markOwned();
+    });
+
     return App.bindEvents();
   },
 
   bindEvents: function() {
     $(document).on('click', '.btn-own', App.handleOwn);
+
   },
 
-  accessToken: async function() {
-    //Fetch auth token from Link
-  },
-  
-  markOwned: async function() {
+  markOwned: function(adopters, account) {
     //Mark stamp ownership
-    App.accessToken();
-  },
-
-  fetchAuthority: async function() {
-    // For testing, identify contract authority address
   },
   
   fetchActiveAccount: async function() {
-    // Same as in activity 2
+    const accounts = await web3.eth.accounts;
+    return accounts[0];
   },
   
   handleOwn: async function(event) {
     event.preventDefault();
     // Assign ownership of stamps
-  }
+  },
 };
 
 $(function() {

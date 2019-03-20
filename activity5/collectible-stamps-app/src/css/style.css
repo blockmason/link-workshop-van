@@ -1,0 +1,19 @@
+#ownerAddress {
+    font-size: 10px;
+}
+
+.container {
+    background-color: black;
+}
+
+.panel-body {
+    height: 530px;
+}
+
+.panel-footer {
+    height: 40px;
+}
+
+h1 {
+    color: yellow;
+}
