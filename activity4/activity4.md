@@ -88,10 +88,6 @@ App = {
   markOwned: async function() {
     // Identify owners of stamps
   },
-
-  fetchAuthority: async function() {
-    // For testing, identify contract authority address
-  },
   
   fetchActiveAccount: async function() {
     // Same as in activity 2
@@ -244,5 +240,149 @@ markOwned: async function() {
   }
 },
 ```
+#### Handle Ownership
+The way our app will set ownership is by posting the stamp ID and an address to the `setOwnership` API endpoint of the Ownership smart contract. Note we've setup a 'click' event listener in our `bindEvents` function:
+```
+bindEvents: function() {
+  $(document).on('click', '.btn-own', App.handleOwn);
+},
+```
+
+> To get the active address, we can use the web3.js function as we did in the `showActiveAccount()` function from activity 2 (https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethaccounts): 
+
+```
+fetchActiveAccount: async function() {
+  const accounts = await web3.eth.accounts;
+  return accounts[0];
+},
+```
+
+> Then, in our `handleOwn` function, we fetch the active account, and if one exists, obtain the stamp data:
+```
+handleOwn: async function(event) {
+  event.preventDefault();
+
+  const account = await App.fetchActiveAccount();
+  
+  if (account) {
+    const stampId = parseInt($(event.target).data('id'));
+    $('.panel-stamp').eq(stampId).find('.btn-own').text("Processing").attr('disabled', true);
+
+    console.log('account is', account);
+    
+    // Make POST request
+  } 
+  else {
+    alert("Ensure you have logged into your Metamask wallet to own this stamp ");
+  }
+}
+```
+> Next, we fetch an access token and make our POST request using a try/catch statement:
+
+```
+handleOwn: async function(event) {
+  event.preventDefault();
+
+  const account = await App.fetchActiveAccount();
+  
+  if (account) {
+    const stampId = parseInt($(event.target).data('id'));
+    $('.panel-stamp').eq(stampId).find('.btn-own').text("Processing").attr('disabled', true);
+
+    
+    console.log('account is', account);
+    const token = await App.accessToken();
+    const url = App.baseURL.concat('setOwnership');
+    
+    const reqBody = {
+      "stampId": stampId,
+      "owner": account
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "post",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token,
+        },
+        body: JSON.stringify(reqBody),
+      });
+      const data = await response.json();
+
+    } catch(err) {
+        console.log(err);
+    }
+  } 
+  else {
+    alert("Ensure you have logged into your Metamask wallet to own this stamp ");
+  }
+}
+
+```
+> Finally, if the response object indicates success, we update ownership by running the `markOwned()` function. Otherwise, we just reactivate the `Own` button. 
+
+```
+handleOwn: async function(event) {
+  event.preventDefault();
+
+  const account = await App.fetchActiveAccount();
+  
+  if (account) {
+    const stampId = parseInt($(event.target).data('id'));
+    $('.panel-stamp').eq(stampId).find('.btn-own').text("Processing").attr('disabled', true);
+
+    
+    console.log('account is', account);
+    const token = await App.accessToken();
+    const url = App.baseURL.concat('setOwnership');
+    
+
+    const reqBody = {
+      "stampId": stampId,
+      "owner": account
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: "post",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token,
+        },
+        body: JSON.stringify(reqBody),
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        App.markOwned();
+      } 
+      else {
+        $('.panel-stamp').eq(stampId).find('.btn-own').text("Own").attr('disabled', false);
+      }
+
+    } catch(err) {
+        console.log(err);
+    }
+  } 
+  else {
+    alert("Ensure you have logged into your Metamask wallet to own this stamp ");
+  }
+}
+```
+That's it! Give your app a try and see how it all works together. The full code is in `app-complete.js`. 
+
+### Stretch Exercise - Use Ethereum's Ropsten Testnet
+> As a stretch exercise, first deploy your `Ownership` contract to Ethereum's Ropsten testnet. You will need to use Infura for your network connector/gateway and fund your Link account with some test Ether (ETH) Go through the Link wizard at https://mason.link/projects/new to create a 'Ropsten' network object and an 'Infura' Network Connector. Then deploy your contract on that network.
+
+> Once deployed, create a new API that uses this Ropsten deployed contract. 
+
+> Finally, update your `Collectible Stamps App` consumer to use the new API and now your App is configured with the public Ropsten testnet! Note: while transactions to the Link testnet take just a few seconds, transactions with the Ropsten testnet can take anywhere from 30-60 seconds. 
+
+
+
+
+
+
 
 
