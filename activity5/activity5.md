@@ -314,7 +314,7 @@ Saving artifacts...
 
 **Congratulations!** You have successfully run your Ownership DApp and executed transactions on the public Ropsten test network!
 
-
+**Q) How does both the developer and end-user experience compare between using Link and Truffle development frameworks?**
 
 
 
