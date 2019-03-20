@@ -22,7 +22,7 @@ App = {
   },
 
   initWeb3: function() {
-    if (typeof web3 !== 'undefined') {
+    if (typeof web3.currentProvider.selectedAddress !== 'undefined') {
       App.web3Provider = web3.currentProvider;
     } else {
       // If no injected web3 instance is detected, fall back to Ganache
@@ -54,7 +54,7 @@ App = {
 
   },
 
-  markOwned: function(adopters, account) {
+  markOwned: function() {
     //Mark stamp ownership
   },
   

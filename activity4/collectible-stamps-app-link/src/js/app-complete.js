@@ -77,7 +77,7 @@ App = {
       
       const data = await response.json();
       console.log('owners object is', data);
-      const owners = data.arg0;
+      const owners = data.result;
       for (i = 0; i < owners.length; i++) {
         if (owners[i] !== '0x0000000000000000000000000000000000000000') {
           $('.panel-stamp').eq(i).find('.btn-own').text("Own").attr('disabled', true);
