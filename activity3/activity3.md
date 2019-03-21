@@ -161,3 +161,4 @@ You should now see the 'OwnershipLink' documentation as follows:
 ![Contract Documentation](images/contract_documentation_link.png)
 
 **Congrats! You have successfully deployed the Ownership contract to the Link testnet and setup the Link APIs which we'll use in our Collectible Stamps App!**
+ 

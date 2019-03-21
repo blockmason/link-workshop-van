@@ -1,4 +1,4 @@
-# Create Web DApp using Link
+# Create your web DApp using Link (i.e. the 'easy' way)
 ## Goal
 In this activity, we will create a web application and use the Link APIs generated in the previous activity to interact with the blockchain. 
 
