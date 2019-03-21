@@ -49,11 +49,11 @@ contract Ownership {
 
     function setOwnership(uint stampId, address owner) public returns (bool) {
         // Set ownership
-	}
+    }
 
     function getOwners() public view returns (address[8] memory) {
         // Return owners array
-	}
+    }
 }
 ```
 
