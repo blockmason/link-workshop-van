@@ -11,9 +11,11 @@ This activity will require you to:
 
 ## General activity notes
 * Discuss the difference between the current web3 release (v0.x.x) and the beta version (v1.0.0).
-* Discuss what is meant by a "web3 instance". 
+* Discuss what is meant by a "web3 instance" and "web3 provider".  
 
 ### Setup
+Refer to the web3 documentation as needed - https://web3js.readthedocs.io/en/1.0/getting-started.html
+
 > Install the web3 dependency using the node package manager in your Terminal. The dependencies listed in`package.json` will be installed.
 ```
     npm install 
@@ -39,7 +41,7 @@ Key attributes or functions of web3 include:
 * The `web3.eth` object and in particular the `getAccounts` `getBalance` and `sendTransaction`  functions
 
 ### Get local blockchain accounts
-First let us fetch all 10 accounts addresses running on our local blockchain. Function calls to the blockchain **return promises** so we can use callbacks, async/await, or simply Promise`.then()` to access our data.
+First let us fetch all 10 accounts addresses running on our local blockchain. Function calls to the blockchain **return promises** so we can use callbacks, async/await, or simply Promise`.then()` to access our data. Refer to: https://web3js.readthedocs.io/en/1.0/web3-eth.html#getaccounts
 ```
 > web3.eth.getAccounts().then(accounts => {
     console.log(accounts);
@@ -71,7 +73,7 @@ Now let us get the balance of one of the local accounts **in ether units**:
 ```
 The balance of the first account is 100 Ether (ETH). 
 
-Currently we are using a local blockchain but we can do exactly the same thing with the **public ethereum mainnet.** 
+Currently we are using a local blockchain but we can do exactly the same thing with the **public ethereum mainnet.** We just need to initiate web3 with the appropriate provider. 
 
 > From the Infura website, select the `MAINNET` endpoint and copy the API URL. This will be our mainnet url that we use to interact with the main ethereum network. 
 ```
