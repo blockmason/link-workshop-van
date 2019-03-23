@@ -179,16 +179,16 @@ So our `markOwned` function will look something like this:
 
 ```
 markOwned: async function() {
-    const ownershipInstance = await App.contracts.Ownership.deployed();
-    const owners = await ownershipInstance.getOwners();
+  const ownershipInstance = await App.contracts.Ownership.deployed();
+  const owners = await ownershipInstance.getOwners();
 
-    for (i = 0; i < owners.length; i++) {
-        if (owners[i] !== '0x0000000000000000000000000000000000000000') {
-            $('.panel-stamp').eq(i).find('.btn-own').text("Own").attr('disabled', true);
-            $('.panel-stamp').eq(i).find('#ownerAddress').empty();
-            $('.panel-stamp').eq(i).find('#ownerAddress').append('Owner: ' + owners[i]).css({ wordWrap: "break-word" });
-        }
+  for (i = 0; i < owners.length; i++) {
+    if (owners[i] !== '0x0000000000000000000000000000000000000000') {
+      $('.panel-stamp').eq(i).find('.btn-own').text("Own").attr('disabled', true);
+      $('.panel-stamp').eq(i).find('#ownerAddress').empty();
+      $('.panel-stamp').eq(i).find('#ownerAddress').append('Owner: ' + owners[i]).css({ wordWrap: "break-word" });
     }
+  }
 },
 ```
 #### Handle Ownership
@@ -202,28 +202,28 @@ bindEvents: function() {
 The code is similar to what we used in activity 4 but again we have to create a contract instance to use as above. So our `handleOwn` function will look something like this:
 ```
 handleOwn: async function(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    const stampId = parseInt($(event.target).data('id'));
-    $('.panel-stamp').eq(stampId).find('.btn-own').text("Processing").attr('disabled', true);
-    
-    const account = await App.fetchActiveAccount();
+  const stampId = parseInt($(event.target).data('id'));
+  $('.panel-stamp').eq(stampId).find('.btn-own').text("Processing").attr('disabled', true);
+  
+  const account = await App.fetchActiveAccount();
 
-    if (account) {
-        const ownershipInstance = await App.contracts.Ownership.deployed();
-        try {
-            const result = await ownershipInstance.setOwnership(stampId, {from: account});
-            console.log('transaction result is', result);
-            setTimeout(function() {
-                App.markOwned();
-                }, 5000);
-        } catch(err) {
-            console.log(err);
-            $('.panel-stamp').eq(stampId).find('.btn-own').text("Own").attr('disabled', false);
-        }
-    } else {
-        alert("Ensure you have logged into your Metamask wallet to own this stamp ");
+  if (account) {
+    const ownershipInstance = await App.contracts.Ownership.deployed();
+    try {
+      const result = await ownershipInstance.setOwnership(stampId, {from: account});
+      console.log('transaction result is', result);
+      setTimeout(function() {
+          App.markOwned();
+          }, 5000);
+    } catch(err) {
+        console.log(err);
+        $('.panel-stamp').eq(stampId).find('.btn-own').text("Own").attr('disabled', false);
     }
+  } else {
+      alert("Ensure you have logged into your Metamask wallet to own this stamp ");
+  }
 },
 ```
 The reason for the 5 second delay with the `setTimeout` function call before we refresh the ownership display is because there is a delay between the transaction getting posted on the public blockchain and when the transaction is confirmed. The `transaction result` object gives an ID of the posted transaction. MetaMask will then shortly thereafter provide a confirmation alert.
