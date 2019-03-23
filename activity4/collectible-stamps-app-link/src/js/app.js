@@ -1,8 +1,8 @@
 App = {
-  clientId: "oauyPe1qd7XpTIMPGCQ-7ES4yMg3aA-yt7NCJdrJUIk",
-  clientSecret: "P5jidxyhgHR/tEZGKybzXLpHiamSDQ4NJPqFXws3tmdRVTH4X6iehCwoC0+cqSR",
+  clientId: "",
+  clientSecret: "",
   authURL: 'https://api.block.mason.link/oauth2/token',
-  baseURL: "https://api.block.mason.link/v1/",
+  baseURL: "",
   web3Provider: null,
 
   init: function() {

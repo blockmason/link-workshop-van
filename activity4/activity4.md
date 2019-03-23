@@ -9,7 +9,7 @@ This activity will require you to:
 
 ## General activity notes
 * This exercise uses JavaScript Promises to handle Link API responses via the native async/await syntax. 
-* This exercise also uses web3 for continuity from activity2 and also to use different wallet address via MetaMask. 
+* This exercise also uses web3 for continuity from activity 2 and also to use different wallet address via MetaMask. 
 
 ### Setup
 > In the `activity4/collectible-stamps-app/` folder, run:
@@ -18,7 +18,7 @@ This activity will require you to:
 ```
 This will install all the node dependencies for this basic front-end app.
 
-> Then, get the app up and running using `lite-server`(as in activity 2), with:
+> Then, get the app up and running using `lite-server` (like in activity 2), with:
 ```
     npm run dev
 ```
@@ -66,7 +66,7 @@ App = {
   },
 
   initWeb3: function() {
-    if (typeof web3 !== 'undefined') {
+    if (typeof web3.currentProvider.selectedAddress !== 'undefined') {
       App.web3Provider = web3.currentProvider;
     } else {
       // If no injected web3 instance is detected, fall back to Ganache
@@ -115,57 +115,56 @@ We'll start by completing the `accessToken()` function first. From Link, we have
 
 Note that the access token expires every 15 mins (900 seconds). Hence, we should make a POST request using the `client_credentials` everytime we want to use a Link API. 
 
-> First create the POST request body using the key/value pairs show in the Link `curl` example:
+> First create the POST request body using the key/value pairs shown in the Link `curl` example:
 ```
 accessToken: async function() {
-    const authBody = {
-        "grant_type": "client_credentials",
-        "client_id": App.clientId,
-        "client_secret": App.clientSecret
-    }
-
+  const authBody = {
+    "grant_type": "client_credentials",
+    "client_id": App.clientId,
+    "client_secret": App.clientSecret
+  }
 },
 ```
 
-> Then using the fetch API, make the POST request to obtain a token promise. Remember to convert the body into a JSON string. 
+> Then using the fetch API, make the POST request to obtain a token. Remember to convert the body into a JSON string. 
 ```
 accessToken: async function() {
-    const authBody = {
-        "grant_type": "client_credentials",
-        "client_id": App.clientId,
-        "client_secret": App.clientSecret
-    }
+  const authBody = {
+    "grant_type": "client_credentials",
+    "client_id": App.clientId,
+    "client_secret": App.clientSecret
+  }
 
-    const tokenResponse = await fetch(App.authURL, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(authBody),
-    });
+  const tokenResponse = await fetch(App.authURL, {
+    method: "post",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(authBody),
+  });
 },
 ```
 
 > Then extract the `tokenResponse` JSON and return the `"access_token"` value:
 ```
 accessToken: async function() {
-    const authBody = {
-        "grant_type": "client_credentials",
-        "client_id": App.clientId,
-        "client_secret": App.clientSecret
-    }
+  const authBody = {
+    "grant_type": "client_credentials",
+    "client_id": App.clientId,
+    "client_secret": App.clientSecret
+  }
 
-    const tokenResponse = await fetch(App.authURL, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(authBody),
-    });
-    
-    const tokenData = await tokenResponse.json();
-    console.log(tokenData);
-    return tokenData["access_token"];
+  const tokenResponse = await fetch(App.authURL, {
+    method: "post",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(authBody),
+  });
+  
+  const tokenData = await tokenResponse.json();
+  console.log(tokenData);
+  return tokenData["access_token"];
 },
 ```
 > Finally, add your `client_id` and `client_secret` from Link to the `App.clientId` and `App.clientSecret` attributes respectively at the top. Then call the `App.accessToken()` function from within the `markeOwned` function definition to trigger it. 
@@ -185,7 +184,6 @@ The way our app will mark ownership is by first retrieving the `ownerOf` array f
 markOwned: async function() {
   const token = await App.accessToken();
   const url = App.baseURL.concat('getOwners');
-
 },
 ```
 The `App.baseURL`attribute is set at the top and will be `https://api.block.mason.link/v1/` . 
@@ -257,7 +255,7 @@ fetchActiveAccount: async function() {
 },
 ```
 
-> Then, in our `handleOwn` function, we fetch the active account, and if one exists, obtain the stamp data:
+> Then, in our `handleOwn` function, we fetch the active account, and if one exists, obtain the relevant stamp data:
 ```
 handleOwn: async function(event) {
   event.preventDefault();
@@ -375,7 +373,7 @@ That's it! Give your app a try and see how it all works together. The full code 
 ### Stretch Exercise - Use Ethereum's Ropsten Testnet
 > As a stretch exercise, first deploy your `Ownership` contract to Ethereum's Ropsten testnet. You will need to use Infura for your network connector/gateway and fund your Link account with some test Ether (ETH) Go through the Link wizard at https://mason.link/projects/new to create a 'Ropsten' network object and an 'Infura' Network Connector. Then deploy your contract on that network.
 
-> Once deployed, create a new API that uses this Ropsten deployed contract. 
+> Once deployed, create a new API that uses this Ropsten deployed contract.
 
 > Finally, update your `Collectible Stamps App` consumer to use the new API and now your App is configured with the public Ropsten testnet! Note: while transactions to the Link testnet take just a few seconds, transactions with the Ropsten testnet can take anywhere from 30-60 seconds. 
 
