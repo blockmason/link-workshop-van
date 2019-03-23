@@ -6,7 +6,7 @@
 
 3. As a take-home stretch exercise, do Activity 2b to learn how to build, sign and broadcast a transaction to the Ropsten account from scratch. This is useful if developing without MetaMask to sign transactions. Introduce `Buffer`, nonces, and `ethereumjs-tx` library. 
    
-4. In Activity 3, participants are introduced to Smart Contracts. We use Solidity, Remix and Link to create and deploy an `Ownership` contract to the Link testnet. 
+4. In Activity 3, participants are introduced to Smart Contracts. We use Solidity, Remix and Link to create and deploy an `Ownership` contract to the Link private network. 
    
 5. Then, in Activity 4, participants create the front-end of the Collectible Stamps App, and in particular, write-out the `markOwned` and `handleOwn` functions. As a stretch exercise, participants can deploy the `Ownership` contract to Ropsten using Link and interact with that public blockchain. Activities 3 and 4 represent creating a fully functioning web DApp 'the easy way' using the Link platform. 
 
