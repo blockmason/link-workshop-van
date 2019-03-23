@@ -6,12 +6,13 @@ In this activity, we will learn about Smart Contract design and use Link to depl
 This activity will require you to:
 * Use Solidity (https://solidity.readthedocs.io/en/v0.5.4/) to create a basic 'Ownership' smart contract
 * Use Remix (https://remix.ethereum.org) to test and validate the smart contract
-* Use Link (https://mason.link) to deploy the smart contract to a test network
+* Use Link (https://mason.link) to deploy the smart contract to the Link private network
 * Use Link to create smart contract APIs to be used by a web app. 
 
 ## General activity notes
 * It is expected workshop participants have some familiarity with Solidity. This workshop will primarily cover 'types' of Solidity objects (https://solidity.readthedocs.io/en/v0.5.4/types.html)
 * A dedicate `getOwners()` function is used instead of the automated getter that comes with the public declaration of the array variable `ownerOf` because the latter requires an array index to be passed to return a single value whereas the former will return the entire array.
+* The Link private network is Link's own internal blockchain.
 
 ### Setup
 > Ensure you have registered for a Link account at https://mason.link (email required)
@@ -122,7 +123,7 @@ contract Ownership {
 ![Remix IDE](images/remix_ide.png)
 
 ### Deploy Ownership contract to Link Testnet and Create API Project
-We're now going to deploy our Ownership smart contract to a test blockchain using Link. 
+We're now going to deploy our Ownership smart contract to a blockchain using Link. 
 
 > Log into Link and setup a sample organization if you haven't done so already. Use the wizard on the Dashboard to create a new project.
 
@@ -132,11 +133,11 @@ We're now going to deploy our Ownership smart contract to a test blockchain usin
 
 > Then, use the `Default Account` Ethereum account, which is automatically set up. 
 
-> Use the `Default Network` which is the Link testnet blockchain.
+> Use the `Default Network` which is the Link private network.
 
-> Use the `Default Network` connector/gateway, which is how Link connects to the network that will the Ownership contract. 
+> Use the `Default Network` connector/gateway, which is how Link connects to the network that will store the Ownership contract. 
 
-> Next, we need to deploy Ownership contract to the Default Network. We'll call this deployment `OwnershipGateway`. Keep the `Address` field empty. 
+> Next, we need to deploy the Ownership contract to the Default Network. We'll call this deployment `OwnershipGateway`. Keep the `Address` field empty. 
 
 ![Contract Deployment Setup](images/new_deployment_link.png)
 
@@ -144,7 +145,7 @@ We're now going to deploy our Ownership smart contract to a test blockchain usin
 
 ![Confirm Contract Deployment](images/confirm_deployment_link.png)
 
-Since this is done on the Link testnet blockchain, the deployment should happen in seconds. When we do this again with the Ethereum public testnet, it'll take about 30-60 seconds. 
+Since this is done on the Link private network, the deployment should happen in seconds. When we do this again with the Ethereum public testnet, it'll take about 30-60 seconds. 
 
 > With your contract now deployed, let's create our API project called `ownership-link`, which will access our Ownership smart contract:
 
@@ -160,5 +161,5 @@ You should now see the 'OwnershipLink' documentation as follows:
 
 ![Contract Documentation](images/contract_documentation_link.png)
 
-**Congrats! You have successfully deployed the Ownership contract to the Link testnet and setup the Link APIs which we'll use in our Collectible Stamps App!**
+**Congrats! You have successfully deployed the Ownership contract to the Link private network and setup the Link APIs which we'll use in our Collectible Stamps App!**
  
