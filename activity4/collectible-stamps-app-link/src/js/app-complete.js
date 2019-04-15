@@ -1,8 +1,8 @@
 App = {
-    clientId: 'iy8O_ePyMJwz1mUXhZKhy59V-LnK5RFQEEEqRP3Smu0',
-    clientSecret: '6ARrngeDJupTZS1q9+gHQ1iuQ/OU3onxe///WZuGVWKST6gPGrCbbHAPjUkcJ80',
+    clientId: 'Pfpww84_GYnlGpqfyeJmAbXL9mk3s2ItUG0jbbp96lM',
+    clientSecret: 'w7uKNRyIAWri/Ubem1pLinjgRrWyWLNcvD4jzEa03A1ZlZP79abYGB9/IOVvHHG',
     authURL: 'https://api.block.mason.link/oauth2/token',
-    baseURL: 'https://api.block.mason.link/van-workshop/ownership-link/',
+    baseURL: 'https://api.block.mason.link/v1/',
     web3Provider: null,
   
     init: function() {

@@ -21,11 +21,11 @@ App = {
   
     showActiveAccount: function() {
       // TODO: Load account data - display active account info on the webpage
-      
+
     },
   
     sendMoney: function() {
-      //TODO: send money from active account to receiver
+      // TODO: send money from active account to receiver
   
     },
 };

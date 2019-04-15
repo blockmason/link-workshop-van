@@ -83,7 +83,7 @@ App = {
       if (account) {
         const ownershipInstance = await App.contracts.Ownership.deployed();
         try {
-            const result = await ownershipInstance.setOwnership(stampId, {from: account});
+            const result = await ownershipInstance.setOwnership(stampId, account);
             console.log('transaction result is', result);
             setTimeout(function() {
                 App.markOwned();

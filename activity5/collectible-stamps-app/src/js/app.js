@@ -54,8 +54,8 @@ App = {
 
   },
 
-  markOwned: function() {
-    //Mark stamp ownership
+  markOwned: async function() {
+    // Mark stamp ownership
   },
   
   fetchActiveAccount: async function() {

@@ -4,6 +4,11 @@ var mnemonic = process.env.MNEMONIC;
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // for more about customizing your Truffle configuration!
+  compilers: {
+    solc: {
+      version: '0.5.4',
+    }
+  },
   networks: {
     development: {
       host: "127.0.0.1",
